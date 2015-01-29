@@ -1,4 +1,4 @@
-package org.luxoft.tutor.maze.domain;
+package org.luxoft.tutor.mazeframework.domain;
 
 public abstract class MapSite {
 

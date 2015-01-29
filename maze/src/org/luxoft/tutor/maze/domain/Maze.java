@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Maze {
 
-	private Map<Integer, Room> rooms = new HashMap<Integer, Room>();
+	private Map<Integer, Room> rooms = new HashMap<>();
 
 	public Room roomNo(int number) {
 		return rooms.get(number);
