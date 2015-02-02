@@ -1,25 +1,18 @@
-package org.luxoft.tutor.maze.domain;
+package org.luxoft.tutor.mazeframework.domain;
 
-import org.luxoft.tutor.mazeframework.domain.MapSite;
+public abstract class Door extends MapSite {
 
-public class Door extends MapSite {
-
-	private boolean open = false;
 	private Room room1 = null;
 	private Room room2 = null;
+	private boolean open = false;
 
-	public Door(Room room1, Room room2) {
-		assert(null != room1 && null != room2);
-		this.room1 = room1;
+	public Door(Room room2, Room room1) {
 		this.room2 = room2;
+		this.room1 = room1;
 	}
 
 	public boolean isOpen() {
 		return open;
-	}
-
-	public void enter() {
-		// TODO Auto-generated method stub
 	}
 
 	public void open() {

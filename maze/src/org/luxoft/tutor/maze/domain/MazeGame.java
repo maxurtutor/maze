@@ -1,5 +1,8 @@
 package org.luxoft.tutor.maze.domain;
 
+import org.luxoft.tutor.mazeframework.domain.Door;
+import org.luxoft.tutor.mazeframework.domain.Room;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,21 +21,21 @@ public class MazeGame {
 
     public Maze createMaze() {
         Maze aMaze = new Maze();
-        Room r1 = new Room(1);
-        Room r2 = new Room(2);
-        Door theDoor = new Door(r1, r2);
+        Room r1 = new RoomImpl(1);
+        Room r2 = new RoomImpl(2);
+        Door theDoor = new DoorImpl(r1, r2);
 
         aMaze.addRoom(r1);
         aMaze.addRoom(r2);
 
-        r1.setSide(NORTH, new Wall());
+        r1.setSide(NORTH, new WallImpl());
         r1.setSide(EAST, theDoor);
-        r1.setSide(SOUTH, new Wall());
-        r1.setSide(WEST, new Wall());
+        r1.setSide(SOUTH, new WallImpl());
+        r1.setSide(WEST, new WallImpl());
 
-        r2.setSide(NORTH, new Wall());
-        r2.setSide(EAST, new Wall());
-        r2.setSide(SOUTH, new Wall());
+        r2.setSide(NORTH, new WallImpl());
+        r2.setSide(EAST, new WallImpl());
+        r2.setSide(SOUTH, new WallImpl());
         r2.setSide(WEST, theDoor);
 
         return aMaze;

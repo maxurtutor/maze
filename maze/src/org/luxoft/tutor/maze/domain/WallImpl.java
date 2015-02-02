@@ -1,8 +1,8 @@
 package org.luxoft.tutor.maze.domain;
 
-import org.luxoft.tutor.mazeframework.domain.MapSite;
+import org.luxoft.tutor.mazeframework.domain.Wall;
 
-public class Wall extends MapSite {
+public class WallImpl extends Wall {
 	
 	public void enter() {
 		// TODO Auto-generated method stub

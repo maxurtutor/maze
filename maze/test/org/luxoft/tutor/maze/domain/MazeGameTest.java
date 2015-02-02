@@ -1,7 +1,9 @@
 package org.luxoft.tutor.maze.domain;
 
 import org.junit.Test;
+import org.luxoft.tutor.mazeframework.domain.Door;
 import org.luxoft.tutor.mazeframework.domain.MapSite;
+import org.luxoft.tutor.mazeframework.domain.Room;
 import org.luxoft.tutor.mazeframework.domain.Side;
 
 import static org.junit.Assert.assertEquals;
@@ -20,14 +22,14 @@ public class MazeGameTest {
         assertEquals(r1, door.otherSideFrom(r2));
         assertEquals(r2, door.otherSideFrom(r1));
 
-        assertTrue(r1.getSide(Side.WEST) instanceof Wall);
-        assertTrue(r1.getSide(Side.EAST) instanceof Door);
-        assertTrue(r1.getSide(Side.NORTH) instanceof Wall);
-        assertTrue(r1.getSide(Side.SOUTH) instanceof Wall);
+        assertTrue(r1.getSide(Side.WEST) instanceof WallImpl);
+        assertTrue(r1.getSide(Side.EAST) instanceof DoorImpl);
+        assertTrue(r1.getSide(Side.NORTH) instanceof WallImpl);
+        assertTrue(r1.getSide(Side.SOUTH) instanceof WallImpl);
 
-        assertTrue(r2.getSide(Side.WEST) instanceof Door);
-        assertTrue(r2.getSide(Side.EAST) instanceof Wall);
-        assertTrue(r2.getSide(Side.NORTH) instanceof Wall);
-        assertTrue(r2.getSide(Side.SOUTH) instanceof Wall);
+        assertTrue(r2.getSide(Side.WEST) instanceof DoorImpl);
+        assertTrue(r2.getSide(Side.EAST) instanceof WallImpl);
+        assertTrue(r2.getSide(Side.NORTH) instanceof WallImpl);
+        assertTrue(r2.getSide(Side.SOUTH) instanceof WallImpl);
     }
 }
