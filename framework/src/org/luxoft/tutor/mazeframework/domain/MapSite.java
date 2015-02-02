@@ -4,7 +4,7 @@ public abstract class MapSite {
 
 	public abstract void enter();
 
-	public void onAssign(Room room) {
+	void onAssign(Room room) {
 
 	}
 

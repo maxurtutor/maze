@@ -22,7 +22,7 @@ public abstract class Door extends MapSite {
 	}
 
 	@Override
-	public void onAssign(Room room) {
+	final void onAssign(Room room) {
 		assert room != null;
 		if (room1 == null) {
 			room1 = room;

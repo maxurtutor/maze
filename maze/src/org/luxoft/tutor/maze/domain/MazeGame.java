@@ -1,13 +1,18 @@
 package org.luxoft.tutor.maze.domain;
 
 import org.luxoft.tutor.mazeframework.domain.Door;
+import org.luxoft.tutor.mazeframework.domain.MapSite;
 import org.luxoft.tutor.mazeframework.domain.Room;
+import org.luxoft.tutor.mazeframework.domain.Side;
+import org.luxoft.tutor.mazeframework.domain.Wall;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MazeGame {
+
+    private Room currentRoom;
 
     public static void main(String[] args) throws Exception {
         printMenu();
@@ -26,9 +31,8 @@ public class MazeGame {
 
 
     private void run() throws IOException {
-
-        final Maze maze = createMaze();
-        Room currentRoom = maze.roomNo(1);
+        Maze maze = createMaze();
+        currentRoom = maze.roomNo(1);
         try (
                 InputStreamReader in = new InputStreamReader(System.in);
                 BufferedReader br = new BufferedReader(in)
@@ -39,30 +43,16 @@ loop:
                 s = br.readLine();
                 switch (s.toUpperCase()) {
                     case "W":
-                        System.out.println("WEST");
-                        if (currentRoom.getRoomNumber() == 2) {
-                            currentRoom = maze.roomNo(1);
-                            System.out.println("Room 1");
-                        } else {
-                            System.out.println("Wall");
-                        }
+                        moveTo(Side.WEST);
                         break;
                     case "N":
-                        System.out.println("NORTH");
-                        System.out.println("Wall");
+                        moveTo(Side.NORTH);
                         break;
                     case "S":
-                        System.out.println("SOUTH");
-                        System.out.println("Wall");
+                        moveTo(Side.SOUTH);
                         break;
                     case "E":
-                        System.out.println("EAST");
-                        if (currentRoom.getRoomNumber() == 1) {
-                            currentRoom = maze.roomNo(2);
-                            System.out.println("Room 2");
-                        } else {
-                            System.out.println("Wall");
-                        }
+                        moveTo(Side.EAST);
                         break;
                     case "?":
                         printMenu();
@@ -75,6 +65,18 @@ loop:
                 }
 
             } while (true);
+        }
+    }
+
+    private void moveTo(Side side) {
+        System.out.println(side.toString());
+        final MapSite site = currentRoom.getSide(side);
+        if (site instanceof Wall) {
+            System.out.println("Wall");
+        } else if (site instanceof Door) {
+            Door door = (Door) site;
+            currentRoom = door.otherSideFrom(currentRoom);
+            System.out.printf("Room %d \n", currentRoom.getRoomNumber());
         }
     }
 

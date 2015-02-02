@@ -8,7 +8,7 @@ public abstract class Room extends MapSite {
 
 	private final EnumMap<Side, MapSite> sites = new EnumMap<>(Side.class);
 
-	public Room(int number, MapSite northSite, MapSite eastSite, MapSite southSite, MapSite westSite) {
+	protected Room(int number, MapSite northSite, MapSite eastSite, MapSite southSite, MapSite westSite) {
 		this.roomNumber = number;
 		setSide(Side.NORTH, northSite);
 		setSide(Side.EAST, eastSite);
