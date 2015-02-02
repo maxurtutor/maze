@@ -7,11 +7,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static org.luxoft.tutor.mazeframework.domain.Side.EAST;
-import static org.luxoft.tutor.mazeframework.domain.Side.NORTH;
-import static org.luxoft.tutor.mazeframework.domain.Side.SOUTH;
-import static org.luxoft.tutor.mazeframework.domain.Side.WEST;
-
 public class MazeGame {
 
     public static void main(String[] args) throws Exception {
@@ -21,23 +16,11 @@ public class MazeGame {
 
     public Maze createMaze() {
         Maze aMaze = new Maze();
-        Room r1 = new RoomImpl(1);
-        Room r2 = new RoomImpl(2);
-        Door theDoor = new DoorImpl(r1, r2);
-
+        Door theDoor = new DoorImpl();
+        Room r1 = new RoomImpl(1, new WallImpl(), theDoor, new WallImpl(), new WallImpl());
         aMaze.addRoom(r1);
+        Room r2 = new RoomImpl(2, new WallImpl(), new WallImpl(), new WallImpl(), theDoor);
         aMaze.addRoom(r2);
-
-        r1.setSide(NORTH, new WallImpl());
-        r1.setSide(EAST, theDoor);
-        r1.setSide(SOUTH, new WallImpl());
-        r1.setSide(WEST, new WallImpl());
-
-        r2.setSide(NORTH, new WallImpl());
-        r2.setSide(EAST, new WallImpl());
-        r2.setSide(SOUTH, new WallImpl());
-        r2.setSide(WEST, theDoor);
-
         return aMaze;
     }
 

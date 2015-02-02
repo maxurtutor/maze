@@ -3,13 +3,11 @@ package org.luxoft.tutor.mazeframework.domain;
 public abstract class Door extends MapSite {
 
 	private Room room1 = null;
+
 	private Room room2 = null;
+
 	private boolean open = false;
 
-	public Door(Room room2, Room room1) {
-		this.room2 = room2;
-		this.room1 = room1;
-	}
 
 	public boolean isOpen() {
 		return open;
@@ -21,6 +19,19 @@ public abstract class Door extends MapSite {
 
 	public void close() {
 		this.open = false;
+	}
+
+	@Override
+	public void onAssign(Room room) {
+		assert room != null;
+		if (room1 == null) {
+			room1 = room;
+		} else if (room2 == null) {
+			assert room1 != room;
+			room2 = room;
+		} else {
+			assert false;
+		}
 	}
 
 	public Room otherSideFrom(Room room) {

@@ -4,12 +4,16 @@ import java.util.EnumMap;
 
 public abstract class Room extends MapSite {
 
-	private Integer roomNumber;
+	private final Integer roomNumber;
 
-	private EnumMap<Side, MapSite> sites = new EnumMap<>(Side.class);
+	private final EnumMap<Side, MapSite> sites = new EnumMap<>(Side.class);
 
-	public Room(int number) {
+	public Room(int number, MapSite northSite, MapSite eastSite, MapSite southSite, MapSite westSite) {
 		this.roomNumber = number;
+		setSide(Side.NORTH, northSite);
+		setSide(Side.EAST, eastSite);
+		setSide(Side.SOUTH, southSite);
+		setSide(Side.WEST, westSite);
 	}
 
 	public Integer getRoomNumber() {
@@ -20,7 +24,9 @@ public abstract class Room extends MapSite {
 		return sites.get(side);
 	}
 
-	public void setSide(Side side, MapSite site) {
+	private void setSide(Side side, MapSite site) {
 		sites.put(side, site);
+		site.onAssign(this);
 	}
+
 }
