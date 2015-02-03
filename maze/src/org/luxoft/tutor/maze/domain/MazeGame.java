@@ -1,17 +1,17 @@
 package org.luxoft.tutor.maze.domain;
 
 import org.luxoft.tutor.mazeframework.domain.Door;
-import org.luxoft.tutor.mazeframework.domain.MapSite;
+import org.luxoft.tutor.mazeframework.domain.Maze;
+import org.luxoft.tutor.mazeframework.domain.Player;
 import org.luxoft.tutor.mazeframework.domain.Room;
-import org.luxoft.tutor.mazeframework.domain.Side;
 
 public class MazeGame {
 
-    private Room currentRoom;
+    private final Player player;
 
     public MazeGame() {
         Maze maze = createMaze();
-        currentRoom = maze.roomNo(1);
+        player = new PlayerImpl(maze.roomNo(1));
     }
 
     public Maze createMaze() {
@@ -24,14 +24,7 @@ public class MazeGame {
         return aMaze;
     }
 
-    public void moveTo(Side side) {
-        final MapSite site = currentRoom.getSide(side);
-        if (site instanceof Door) {
-            currentRoom = ((Door) site).otherSideFrom(currentRoom);
-        }
-    }
-
-    public Room currentRoom() {
-        return currentRoom;
+    public Player getPlayer() {
+        return player;
     }
 }

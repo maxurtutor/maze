@@ -1,6 +1,4 @@
-package org.luxoft.tutor.maze.domain;
-
-import org.luxoft.tutor.mazeframework.domain.Room;
+package org.luxoft.tutor.mazeframework.domain;
 
 import java.util.HashMap;
 import java.util.Map;

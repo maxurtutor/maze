@@ -3,6 +3,7 @@ package org.luxoft.tutor.maze.domain;
 import org.junit.Test;
 import org.luxoft.tutor.mazeframework.domain.Door;
 import org.luxoft.tutor.mazeframework.domain.MapSite;
+import org.luxoft.tutor.mazeframework.domain.Maze;
 import org.luxoft.tutor.mazeframework.domain.Room;
 import org.luxoft.tutor.mazeframework.domain.Side;
 

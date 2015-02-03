@@ -1,13 +1,13 @@
 package org.luxoft.tutor.maze.view;
 
-import org.luxoft.tutor.maze.domain.MazeGame;
+import org.luxoft.tutor.mazeframework.domain.Player;
 
 public class View {
 
-    private final MazeGame game;
+    private final Player player;
 
-    public View(MazeGame game) {
-        this.game = game;
+    public View(Player player) {
+        this.player = player;
     }
 
     public void printMenu() {
@@ -32,6 +32,6 @@ public class View {
     }
 
     public void show() {
-        info("Room %d \n", game.currentRoom().getRoomNumber());
+        info(player.asString());
     }
 }
