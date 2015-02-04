@@ -16,7 +16,11 @@ public abstract class Room extends MapSite {
 		setSide(Side.WEST, westSite);
 	}
 
-	public Integer getRoomNumber() {
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public Integer getRoomNumber() {
 		return roomNumber;
 	}
 
@@ -29,4 +33,47 @@ public abstract class Room extends MapSite {
 		site.onAssign(this);
 	}
 
+    public static class Builder {
+
+        private MapSiteFactory factory = MapSiteFactory.get();
+
+        private int number;
+        private MapSite northSite = factory.makeWall();
+        private MapSite eastSite = factory.makeWall();
+        private MapSite southSite = factory.makeWall();
+        private MapSite westSite = factory.makeWall();
+
+        private Builder() {
+        }
+
+        public Builder number(int number) {
+            this.number = number;
+            return this;
+        }
+
+        public Builder north(MapSite northSite) {
+            this.northSite = northSite;
+            return this;
+        }
+
+        public Builder east(MapSite eastSite) {
+            this.eastSite = eastSite;
+            return this;
+        }
+
+        public Builder south(MapSite southSite) {
+            this.southSite = southSite;
+            return this;
+        }
+
+        public Builder west(MapSite westSite) {
+            this.westSite = westSite;
+            return this;
+        }
+
+        public Room build() {
+            return factory.makeRoom(number, northSite, eastSite, southSite, westSite);
+        }
+
+    }
 }

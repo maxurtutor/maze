@@ -1,8 +1,10 @@
 package org.luxoft.tutor.maze.domain;
 
 import org.luxoft.tutor.mazeframework.domain.Door;
+import org.luxoft.tutor.mazeframework.domain.MapSiteFactory;
 import org.luxoft.tutor.mazeframework.domain.Maze;
 import org.luxoft.tutor.mazeframework.domain.Player;
+import org.luxoft.tutor.mazeframework.domain.Room;
 
 public class MazeGame {
 
@@ -15,15 +17,15 @@ public class MazeGame {
 
     public Maze createMaze() {
         Maze aMaze = new Maze();
-        Door theDoor = new DoorImpl();
+        Door theDoor = MapSiteFactory.get().makeDoor();
         aMaze.addRoom(
-                RoomImpl.builder()
+                Room.builder()
                         .number(1)
                         .east(theDoor)
                         .build()
         );
         aMaze.addRoom(
-                RoomImpl.builder()
+                Room.builder()
                         .number(2)
                         .west(theDoor)
                         .build()

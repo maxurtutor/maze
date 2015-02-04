@@ -3,6 +3,7 @@ package org.luxoft.tutor.maze.domain;
 import org.junit.Test;
 import org.luxoft.tutor.mazeframework.domain.Door;
 import org.luxoft.tutor.mazeframework.domain.MapSite;
+import org.luxoft.tutor.mazeframework.domain.MapSiteFactory;
 import org.luxoft.tutor.mazeframework.domain.Maze;
 import org.luxoft.tutor.mazeframework.domain.Room;
 import org.luxoft.tutor.mazeframework.domain.Side;
@@ -14,6 +15,8 @@ public class MazeGameTest {
 
     @Test
     public void testCreateMaze() throws Exception {
+        MapSiteFactory.setInstance(new MapSiteFactoryImpl());
+
         final Maze maze = new MazeGame().createMaze();
         final Room r1 = maze.roomNo(1);
         final Room r2 = maze.roomNo(2);
