@@ -17,7 +17,7 @@ public class MazeGame {
 
     public Maze createMaze() {
         Maze aMaze = new Maze();
-        Door theDoor = MapSiteFactory.get().makeDoor();
+        Door theDoor = MapSiteFactory.get().makeMapSite("door");
         aMaze.addRoom(
                 Room.builder()
                         .number(1)

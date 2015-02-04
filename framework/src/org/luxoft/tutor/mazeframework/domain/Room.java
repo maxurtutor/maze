@@ -37,11 +37,11 @@ public abstract class Room extends MapSite {
 
         private MapSiteFactory factory = MapSiteFactory.get();
 
-        private int number;
-        private MapSite northSite = factory.makeWall();
-        private MapSite eastSite = factory.makeWall();
-        private MapSite southSite = factory.makeWall();
-        private MapSite westSite = factory.makeWall();
+        private Integer number;
+        private MapSite northSite = MapSiteFactory.get().<Wall>makeMapSite("wall");
+        private MapSite eastSite = MapSiteFactory.get().<Wall>makeMapSite("wall");
+        private MapSite southSite = MapSiteFactory.get().<Wall>makeMapSite("wall");
+        private MapSite westSite = MapSiteFactory.get().<Wall>makeMapSite("wall");
 
         private Builder() {
         }
