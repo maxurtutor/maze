@@ -3,7 +3,6 @@ package org.luxoft.tutor.maze.domain;
 import org.luxoft.tutor.mazeframework.domain.Door;
 import org.luxoft.tutor.mazeframework.domain.Maze;
 import org.luxoft.tutor.mazeframework.domain.Player;
-import org.luxoft.tutor.mazeframework.domain.Room;
 
 public class MazeGame {
 
@@ -17,10 +16,18 @@ public class MazeGame {
     public Maze createMaze() {
         Maze aMaze = new Maze();
         Door theDoor = new DoorImpl();
-        Room r1 = new RoomImpl(1, new WallImpl(), theDoor, new WallImpl(), new WallImpl());
-        aMaze.addRoom(r1);
-        Room r2 = new RoomImpl(2, new WallImpl(), new WallImpl(), new WallImpl(), theDoor);
-        aMaze.addRoom(r2);
+        aMaze.addRoom(
+                RoomImpl.builder()
+                        .number(1)
+                        .east(theDoor)
+                        .build()
+        );
+        aMaze.addRoom(
+                RoomImpl.builder()
+                        .number(2)
+                        .west(theDoor)
+                        .build()
+        );
         return aMaze;
     }
 
