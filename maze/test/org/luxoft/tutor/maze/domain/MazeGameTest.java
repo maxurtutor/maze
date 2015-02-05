@@ -18,7 +18,7 @@ public class MazeGameTest {
     public void testCreateMaze() throws Exception {
         MapSiteFactory.setInstance(new MapSiteFactoryImpl());
 
-        final Maze maze = new MazeGame().createMaze();
+        final Maze maze = MazeGame.get().createMaze();
         final Room r1 = maze.roomNo(1);
         final Room r2 = maze.roomNo(2);
         final MapSite site = r1.getSide(Side.EAST);
@@ -37,7 +37,7 @@ public class MazeGameTest {
     public void testWallIsFlyweight() throws Exception {
         MapSiteFactory.setInstance(new MapSiteFactoryImpl());
 
-        final Maze maze = new MazeGame().createMaze();
+        final Maze maze = MazeGame.get().createMaze();
         final Room r1 = maze.roomNo(1);
         final Room r2 = maze.roomNo(2);
 

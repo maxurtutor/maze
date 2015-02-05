@@ -5,12 +5,19 @@ import org.luxoft.tutor.mazeframework.domain.MapSiteFactory;
 import org.luxoft.tutor.mazeframework.domain.Maze;
 import org.luxoft.tutor.mazeframework.domain.Player;
 import org.luxoft.tutor.mazeframework.domain.Room;
+import org.luxoft.tutor.mazeframework.domain.Side;
 
 public class MazeGame {
 
+    private static MazeGame instance = new MazeGame();
+
     private final Player player;
 
-    public MazeGame() {
+    public static MazeGame get() {
+        return instance;
+    }
+
+    private MazeGame() {
         Maze maze = createMaze();
         player = new PlayerImpl(maze.roomNo(1));
     }
@@ -35,7 +42,12 @@ public class MazeGame {
         return aMaze;
     }
 
-    public Player getPlayer() {
-        return player;
+
+    public String asString() {
+        return player.asString();
+    }
+
+    public void goTo(Side side) {
+        player.moveTo(side);
     }
 }

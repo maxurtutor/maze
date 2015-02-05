@@ -1,6 +1,6 @@
 package org.luxoft.tutor.maze.view;
 
-import org.luxoft.tutor.mazeframework.domain.Player;
+import org.luxoft.tutor.maze.domain.MazeGame;
 import org.luxoft.tutor.mazeframework.domain.Side;
 
 import java.io.BufferedReader;
@@ -10,11 +10,9 @@ import java.io.InputStreamReader;
 public class Controller {
 
     private final View view;
-    private final Player player;
 
-    public Controller(View view, Player player) {
+    public Controller(View view) {
         this.view = view;
-        this.player = player;
     }
 
     public void run() throws IOException {
@@ -56,7 +54,7 @@ public class Controller {
 
     private void goTo(Side side) {
         view.info(side.toString());
-        player.moveTo(side);
+        MazeGame.get().goTo(side);
         view.show();
     }
 
