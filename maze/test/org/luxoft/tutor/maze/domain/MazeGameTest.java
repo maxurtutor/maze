@@ -29,6 +29,7 @@ public class MazeGameTest {
 
         assertTrue(r1.getSide(Side.EAST) instanceof DoorImpl);
         assertTrue(r2.getSide(Side.WEST) instanceof DoorImpl);
+        assertTrue(r1.getSide(Side.NORTH) instanceof MagicDecorator);
     }
 
 
@@ -42,7 +43,7 @@ public class MazeGameTest {
 
         MapSite wall = MapSiteFactory.get().makeSharedMapSite("wall");
 
-        assertSame(wall, r1.getSide(Side.NORTH));
+
         assertSame(wall, r1.getSide(Side.SOUTH));
         assertSame(wall, r1.getSide(Side.WEST));
 

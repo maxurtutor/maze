@@ -17,10 +17,12 @@ public class MazeGame {
 
     public Maze createMaze() {
         Maze aMaze = new Maze();
-        Door theDoor = MapSiteFactory.get().makeMapSite("door");
+        final MapSiteFactory factory = MapSiteFactory.get();
+        Door theDoor = factory.makeMapSite("door");
         aMaze.addRoom(
                 Room.builder()
                         .number(1)
+                        .north(factory.makeMapSite("magicWall"))
                         .east(theDoor)
                         .build()
         );

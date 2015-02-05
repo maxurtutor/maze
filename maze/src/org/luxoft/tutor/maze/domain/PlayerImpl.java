@@ -35,6 +35,7 @@ public class PlayerImpl extends Player {
         for (MapSite site : lastPath) {
             result += format(" -> %s", site.asString());
         }
+        result += format("\n\nHealth: %s\n", health());
         return result;
     }
 
