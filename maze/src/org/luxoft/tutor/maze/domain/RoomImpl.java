@@ -14,13 +14,13 @@ public class RoomImpl extends Room {
 
 	@Override
 	public void enter(Player player) {
+        super.enter(player);
         player.visit(this);
-        player.moveToRoom(this);
 	}
 
     @Override
     public String asString() {
-        return format("Room %d", getRoomNumber());
+        return format("Room %d", getNumber());
     }
 
 

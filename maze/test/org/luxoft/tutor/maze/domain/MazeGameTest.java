@@ -19,32 +19,30 @@ public class MazeGameTest {
         MapSiteFactory.setInstance(new MapSiteFactoryImpl());
 
         final Maze maze = MazeGame.get().createMaze();
-        final Room r1 = maze.roomNo(1);
-        final Room r2 = maze.roomNo(2);
+        final Room r1 = maze.cellBy(1);
+        final Room r2 = maze.cellBy(2);
         final MapSite site = r1.getSide(Side.EAST);
         final Door door = (Door) site;
 
         assertEquals(r1, door.otherSideFrom(r2));
         assertEquals(r2, door.otherSideFrom(r1));
 
+        assertTrue(r1.getSide(Side.SOUTH) instanceof DoorImpl);
         assertTrue(r1.getSide(Side.EAST) instanceof DoorImpl);
         assertTrue(r2.getSide(Side.WEST) instanceof DoorImpl);
         assertTrue(r1.getSide(Side.NORTH) instanceof MagicDecorator);
     }
-
 
     @Test
     public void testWallIsFlyweight() throws Exception {
         MapSiteFactory.setInstance(new MapSiteFactoryImpl());
 
         final Maze maze = MazeGame.get().createMaze();
-        final Room r1 = maze.roomNo(1);
-        final Room r2 = maze.roomNo(2);
+        final Room r1 = maze.cellBy(1);
+        final Room r2 = maze.cellBy(2);
 
         MapSite wall = MapSiteFactory.get().makeSharedMapSite("wall");
 
-
-        assertSame(wall, r1.getSide(Side.SOUTH));
         assertSame(wall, r1.getSide(Side.WEST));
 
         assertSame(wall, r2.getSide(Side.NORTH));

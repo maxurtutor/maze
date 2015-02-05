@@ -18,28 +18,37 @@ public class MazeGame {
     }
 
     private MazeGame() {
-        Maze maze = createMaze();
-        player = new PlayerImpl(maze.roomNo(1));
+        player = new PlayerImpl();
+        createMaze().enter(player);
     }
 
     public Maze createMaze() {
-        Maze aMaze = new Maze();
+        Maze maze0 = new MazeImpl(0);
         final MapSiteFactory factory = MapSiteFactory.get();
-        Door theDoor = factory.makeMapSite("door");
-        aMaze.addRoom(
+        Door door1 = factory.makeMapSite("door");
+        Door door2 = factory.makeMapSite("door");
+        maze0.addCell(
                 Room.builder()
                         .number(1)
                         .north(factory.makeMapSite("magicWall"))
-                        .east(theDoor)
+                        .east(door1)
+                        .south(door2)
                         .build()
         );
-        aMaze.addRoom(
+        maze0.addCell(
                 Room.builder()
                         .number(2)
-                        .west(theDoor)
+                        .west(door1)
                         .build()
         );
-        return aMaze;
+        Maze maze1 = new MazeImpl(3);
+        maze1.addCell(
+                Room.builder()
+                        .number(101)
+                        .north(door2)
+                        .build()
+        );
+        return maze0;
     }
 
 

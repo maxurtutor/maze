@@ -8,10 +8,6 @@ public abstract class Player {
 
     private AtomicInteger health = new AtomicInteger(100);
 
-    public Player(Room currentRoom) {
-        this.currentRoom = currentRoom;
-    }
-
     public void moveTo(Side side) {
         final MapSite site = currentRoom.getSide(side);
         site.enter(this);
