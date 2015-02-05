@@ -9,6 +9,7 @@ import org.luxoft.tutor.mazeframework.domain.Room;
 import org.luxoft.tutor.mazeframework.domain.Side;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 public class MazeGameTest {
@@ -26,14 +27,27 @@ public class MazeGameTest {
         assertEquals(r1, door.otherSideFrom(r2));
         assertEquals(r2, door.otherSideFrom(r1));
 
-        assertTrue(r1.getSide(Side.WEST) instanceof WallImpl);
         assertTrue(r1.getSide(Side.EAST) instanceof DoorImpl);
-        assertTrue(r1.getSide(Side.NORTH) instanceof WallImpl);
-        assertTrue(r1.getSide(Side.SOUTH) instanceof WallImpl);
-
         assertTrue(r2.getSide(Side.WEST) instanceof DoorImpl);
-        assertTrue(r2.getSide(Side.EAST) instanceof WallImpl);
-        assertTrue(r2.getSide(Side.NORTH) instanceof WallImpl);
-        assertTrue(r2.getSide(Side.SOUTH) instanceof WallImpl);
+    }
+
+
+    @Test
+    public void testWallIsFlyweight() throws Exception {
+        MapSiteFactory.setInstance(new MapSiteFactoryImpl());
+
+        final Maze maze = new MazeGame().createMaze();
+        final Room r1 = maze.roomNo(1);
+        final Room r2 = maze.roomNo(2);
+
+        MapSite wall = MapSiteFactory.get().makeSharedMapSite("wall");
+
+        assertSame(wall, r1.getSide(Side.NORTH));
+        assertSame(wall, r1.getSide(Side.SOUTH));
+        assertSame(wall, r1.getSide(Side.WEST));
+
+        assertSame(wall, r2.getSide(Side.NORTH));
+        assertSame(wall, r2.getSide(Side.EAST));
+        assertSame(wall, r2.getSide(Side.SOUTH));
     }
 }

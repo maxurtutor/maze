@@ -19,15 +19,24 @@ public abstract class MapSiteFactory {
 
     private final Map<String, MapSite> prototypes = new HashMap<>();
 
-
-    public <T extends MapSite> T makeMapSite(String kind) {
+    public <T extends MapSite> T makeSharedMapSite(String kind) {
         final MapSite site = prototypes.get(kind.toLowerCase());
         if (site == null)  {
             throw new IllegalArgumentException(format("The site of '%s' was not found", kind));
         }
         try {
             //noinspection unchecked
-            return (T) site.clone();
+            return (T) site;
+        } catch (ClassCastException e) {
+            throw new IllegalStateException(format("The site of '%s' has invalid type", kind));
+        }
+    }
+
+
+    public <T extends MapSite> T makeMapSite(String kind) {
+        try {
+            //noinspection unchecked
+            return (T) makeSharedMapSite(kind).clone();
         } catch (ClassCastException e) {
             throw new IllegalStateException(format("The site of '%s' has invalid type", kind));
         } catch (CloneNotSupportedException e) {
