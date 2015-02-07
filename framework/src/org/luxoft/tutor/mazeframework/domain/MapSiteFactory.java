@@ -11,6 +11,7 @@ public abstract class MapSiteFactory {
 
     public static void setInstance(MapSiteFactory instance) {
         MapSiteFactory.instance = instance;
+        instance.init();
     }
 
     public static MapSiteFactory get() {
@@ -48,6 +49,8 @@ public abstract class MapSiteFactory {
         prototypes.put(kind.toLowerCase(), site);
     }
 
+    protected abstract void init();
+
     public abstract Room makeRoom(
             Integer number,
             MapSite northSite,
@@ -55,5 +58,8 @@ public abstract class MapSiteFactory {
             MapSite southSite,
             MapSite westSite
     );
+
+
+    public abstract Maze makeMaze(Integer number);
 
 }

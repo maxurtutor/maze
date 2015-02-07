@@ -1,5 +1,6 @@
 package org.luxoft.tutor.maze.domain;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.luxoft.tutor.mazeframework.domain.Door;
 import org.luxoft.tutor.mazeframework.domain.MapSite;
@@ -14,11 +15,17 @@ import static org.junit.Assert.assertTrue;
 
 public class MazeGameTest {
 
+    private MapSiteFactoryImpl factory;
+
+    @Before
+    public void setUp() throws Exception {
+        factory = new MapSiteFactoryImpl();
+        MapSiteFactory.setInstance(factory);
+    }
+
     @Test
     public void testCreateMaze() throws Exception {
-        MapSiteFactory.setInstance(new MapSiteFactoryImpl());
-
-        final Maze maze = MazeGame.get().createMaze();
+        final Maze maze = factory.makeMaze(0);
         final Room r1 = maze.cellBy(1);
         final Room r2 = maze.cellBy(2);
         final MapSite site = r1.getSide(Side.EAST);
@@ -35,16 +42,11 @@ public class MazeGameTest {
 
     @Test
     public void testWallIsFlyweight() throws Exception {
-        MapSiteFactory.setInstance(new MapSiteFactoryImpl());
-
-        final Maze maze = MazeGame.get().createMaze();
+        final Maze maze = factory.makeMaze(3);
         final Room r1 = maze.cellBy(1);
         final Room r2 = maze.cellBy(2);
-
         MapSite wall = MapSiteFactory.get().makeSharedMapSite("wall");
-
         assertSame(wall, r1.getSide(Side.WEST));
-
         assertSame(wall, r2.getSide(Side.NORTH));
         assertSame(wall, r2.getSide(Side.EAST));
         assertSame(wall, r2.getSide(Side.SOUTH));

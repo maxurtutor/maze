@@ -19,10 +19,6 @@ public abstract class Room extends MapCell {
         player.moveToRoom(this);
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
     public MapSite getSide(Side side) {
 		return sites.get(side);
 	}
@@ -31,6 +27,11 @@ public abstract class Room extends MapCell {
 		sites.put(side, site);
 		site.onAssign(this);
 	}
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
 
     public static class Builder {
 
