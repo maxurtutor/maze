@@ -1,24 +1,19 @@
 package org.luxoft.tutor.maze.domain;
 
-import org.luxoft.tutor.mazeframework.domain.Displayed;
 import org.luxoft.tutor.mazeframework.domain.MapSiteFactory;
+import org.luxoft.tutor.mazeframework.domain.MazeGame;
 import org.luxoft.tutor.mazeframework.domain.Player;
-import org.luxoft.tutor.mazeframework.domain.Side;
 import org.luxoft.tutor.mazeframework.domain.View;
 
-public class MazeGame extends Displayed {
+public class MazeGameImpl extends MazeGame {
 
     private final Player player;
 
-    public MazeGame(View<MazeGame> implementation) {
+    public MazeGameImpl(View<MazeGame> implementation) {
         super(implementation);
         final MapSiteFactory factory = MapSiteFactory.get();
         player = new PlayerImpl();
         factory.makeMaze(0).enter(player);
-    }
-
-    public void goTo(Side side) {
-        player.moveTo(side);
     }
 
     @Override
@@ -26,7 +21,7 @@ public class MazeGame extends Displayed {
         return "Game";
     }
 
-    public Player getCurrentPlayer() {
+    @Override public Player getCurrentPlayer() {
         return player;
     }
 }

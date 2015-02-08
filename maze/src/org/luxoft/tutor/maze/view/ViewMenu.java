@@ -2,10 +2,10 @@ package org.luxoft.tutor.maze.view;
 
 import org.luxoft.tutor.mazeframework.view.console.ViewConsoleImpl;
 
-public class ViewMenu extends ViewConsoleImpl<Menu> {
+public class ViewMenu extends ViewConsoleImpl<MenuImpl> {
 
     @Override
-    public void show(String resourceId, Menu data) {
+    public void show(String resourceId, MenuImpl data) {
         info("- %s -", resourceId);
 
         info("'W' Go to WEST");
