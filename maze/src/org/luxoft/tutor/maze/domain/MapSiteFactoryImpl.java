@@ -5,7 +5,6 @@ import org.luxoft.tutor.mazeframework.domain.MapSite;
 import org.luxoft.tutor.mazeframework.domain.MapSiteFactory;
 import org.luxoft.tutor.mazeframework.domain.Maze;
 import org.luxoft.tutor.mazeframework.domain.Room;
-import org.luxoft.tutor.mazeframework.domain.RoomProxy;
 
 import static org.luxoft.tutor.maze.domain.MagicDecorator.magic;
 
@@ -37,18 +36,13 @@ public class MapSiteFactoryImpl extends MapSiteFactory {
     private Maze createMaze3() {
         Maze result = new MazeImpl(3);
         Door door2 = makeMapSite("door");
+        door2.setSide(0, 1);
         result.addCell(
                 Room.builder()
                         .number(101)
                         .north(door2)
                         .build()
         );
-        RoomProxy.proxyBuilder()
-                .number(-1)
-                .south(door2)
-                .targetMaze(0)
-                .targetRoom(1)
-                .build();
         return result;
     }
 
@@ -56,6 +50,7 @@ public class MapSiteFactoryImpl extends MapSiteFactory {
         Maze result = new MazeImpl(0);
         Door door1 = makeMapSite("door");
         Door door2 = makeMapSite("door");
+        door2.setSide(3, 101);
         result.addCell(
                 Room.builder()
                         .number(1)
@@ -70,12 +65,6 @@ public class MapSiteFactoryImpl extends MapSiteFactory {
                         .west(door1)
                         .build()
         );
-        RoomProxy.proxyBuilder()
-                .number(-1)
-                .north(door2)
-                .targetMaze(3)
-                .targetRoom(101)
-                .build();
         return result;
     }
 

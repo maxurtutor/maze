@@ -44,4 +44,12 @@ public abstract class Door extends MapSite {
 			return null;
 		}
 	}
+
+    public void setSide(int targetMaze, int targetRoom) {
+        RoomProxy.proxyBuilder()
+                .door(this)
+                .targetMaze(targetMaze)
+                .targetRoom(targetRoom)
+                .build();
+    }
 }
