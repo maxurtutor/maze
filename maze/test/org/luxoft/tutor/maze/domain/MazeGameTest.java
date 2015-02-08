@@ -42,7 +42,7 @@ public class MazeGameTest {
 
     @Test
     public void testWallIsFlyweight() throws Exception {
-        final Maze maze = factory.makeMaze(3);
+        final Maze maze = factory.makeMaze(0);
         final Room r1 = maze.cellBy(1);
         final Room r2 = maze.cellBy(2);
         MapSite wall = MapSiteFactory.get().makeSharedMapSite("wall");
