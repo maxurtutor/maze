@@ -2,6 +2,7 @@ package org.luxoft.tutor.maze.view;
 
 import org.luxoft.tutor.maze.domain.MazeGame;
 import org.luxoft.tutor.mazeframework.domain.Side;
+import org.luxoft.tutor.mazeframework.view.View;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,10 +10,12 @@ import java.io.InputStreamReader;
 
 public class Controller {
 
-    private final View view;
+    private final View viewGame;
+    private final View viewMenu;
 
-    public Controller(View view) {
-        this.view = view;
+    public Controller(View viewGame, View viewMenu) {
+        this.viewGame = viewGame;
+        this.viewMenu = viewMenu;
     }
 
     public void run() throws IOException {
@@ -39,13 +42,13 @@ public class Controller {
                         goTo(Side.EAST);
                         break;
                     case "?":
-                        view.printMenu();
+                        viewMenu.show();
                         break;
                     case "Q":
-                        view.info("Good bay!");
+                        viewGame.info("Good bay!");
                         break loop;
                     default:
-                        view.error("Unknown command");
+                        viewGame.error("Unknown command");
                 }
 
             } while (true);
@@ -53,9 +56,9 @@ public class Controller {
     }
 
     private void goTo(Side side) {
-        view.info(side.toString());
+        viewGame.info(side.toString());
         MazeGame.get().goTo(side);
-        view.show();
+        viewGame.show();
     }
 
 }
