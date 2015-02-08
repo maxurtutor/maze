@@ -4,12 +4,13 @@ import org.luxoft.tutor.mazeframework.domain.Command;
 import org.luxoft.tutor.mazeframework.domain.Displayed;
 import org.luxoft.tutor.mazeframework.domain.View;
 
-import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static java.lang.String.format;
 
-public abstract class Menu extends Displayed {
+public abstract class Menu extends Displayed implements Iterable<Map.Entry<String, Command>> {
 
     protected Menu(View implementation) {
         super(implementation);
@@ -17,7 +18,7 @@ public abstract class Menu extends Displayed {
 
     private static Menu instance;
 
-    private final Map<String, Command> commands = new HashMap<>();
+    private final Map<String, Command> commands = new LinkedHashMap<>();
 
     public static void setInstance(Menu instance) {
         Menu.instance = instance;
@@ -46,5 +47,8 @@ public abstract class Menu extends Displayed {
         commands.put(kind.toLowerCase(), command);
     }
 
-
+    @Override
+    public Iterator<Map.Entry<String, Command>> iterator() {
+        return commands.entrySet().iterator();
+    }
 }

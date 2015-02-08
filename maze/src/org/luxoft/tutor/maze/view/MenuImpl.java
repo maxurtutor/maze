@@ -6,6 +6,8 @@ import org.luxoft.tutor.mazeframework.domain.Side;
 import org.luxoft.tutor.mazeframework.domain.View;
 import org.luxoft.tutor.mazeframework.view.Menu;
 
+import static java.lang.String.format;
+
 public class MenuImpl extends Menu {
 
     @Override
@@ -15,12 +17,12 @@ public class MenuImpl extends Menu {
 
     public MenuImpl(View implementation, MazeGame mazeGame) {
         super(implementation);
-        persist("Q", new ExitCommand(mazeGame));
         persist("W", new GoToCommand(mazeGame, Side.WEST));
         persist("E", new GoToCommand(mazeGame, Side.EAST));
         persist("S", new GoToCommand(mazeGame, Side.SOUTH));
         persist("N", new GoToCommand(mazeGame, Side.NORTH));
         persist("?", new HelpCommand());
+        persist("Q", new ExitCommand(mazeGame));
     }
 
     @SuppressWarnings("unchecked")
@@ -28,6 +30,7 @@ public class MenuImpl extends Menu {
     protected Command makeUnknownCommand() {
         return new UnknownCommand();
     }
+
 
     private class ExitCommand extends Command {
 
@@ -42,6 +45,11 @@ public class MenuImpl extends Menu {
         public void execute() {
             info("Good bay!");
             mazeGame.terminate();
+        }
+
+        @Override
+        public String toString() {
+            return "Exit";
         }
     }
 
@@ -61,6 +69,12 @@ public class MenuImpl extends Menu {
             mazeGame.goTo(side);
             mazeGame.show();
         }
+
+        @Override
+        public String toString() {
+            return format("Go to %s", side);
+        }
+
     }
 
     private class HelpCommand extends Command {
@@ -68,6 +82,12 @@ public class MenuImpl extends Menu {
         public void execute() {
             show();
         }
+
+        @Override
+        public String toString() {
+            return format("Print Menu");
+        }
+
     }
 
     private class UnknownCommand extends Command {
